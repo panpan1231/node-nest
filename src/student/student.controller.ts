@@ -1,10 +1,15 @@
 import {Controller,Get,Post,Put,Param,Body} from "@nestjs/common"
+import { timingSafeEqual } from "crypto"
 import {CreateStudentDto,UpdateStudentDto,StudentResponseDto} from "./dto/studemt.dto"
+import {StudentService} from "./student.service"
 @Controller('students')
 export class StudentController{
+    constructor(private readonly studentService:StudentService){
+
+    }
     @Get()
     getStudents():StudentResponseDto[]{
-        return "ALL Students"
+        return this.studentService.getStudents()
     }
 
     @Get(':studentId')
@@ -12,7 +17,7 @@ export class StudentController{
         @Param('studentId') studentId:string
     ):StudentResponseDto{
         console.log(studentId)
-        return "Get student by id"+studentId
+        return this.studentService.getStudentById(studentId)
     }
 
     @Post()
@@ -20,7 +25,7 @@ export class StudentController{
         @Body() body:CreateStudentDto
     ):StudentResponseDto{
         console.log(body)
-        return "Create Student"+JSON.stringify(body)
+        return this.studentService.createStudent(body)
     }
 
     @Put(':studentId')
@@ -28,6 +33,6 @@ export class StudentController{
         @Param('studentId') studentId:string,
         @Body() body:UpdateStudentDto
     ):StudentResponseDto{
-        return "Update Student by id"+studentId+JSON.stringify(body)
+        return this.studentService.updateStudent(body,studentId)
     }
 }
