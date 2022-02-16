@@ -11,7 +11,7 @@ import { TeacherService } from './teacher.service';
 
 @Controller('teachers')
 export class TeacherController {
-  constructor(private readonly teacherService: TeacherService) {}
+  constructor(private readonly teacherService: TeacherService,private readonly aaa: TeacherService,) {}
 
   @Get()
   getTeachers(): TeacherResponseDto[] {
@@ -22,7 +22,7 @@ export class TeacherController {
   getTeacherById(
     @Param('id', new ParseUUIDPipe()) id: string,
   ): TeacherResponseDto {
-    return this.teacherService.getTeacherById(id);
+    return this.aaa.getTeacherById(id);
   }
 
   @Get(':teacherId/students')

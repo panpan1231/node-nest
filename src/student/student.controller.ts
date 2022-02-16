@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import {
   CreateStudentDto,
+  CreateUserDto,
   UpdateStudentDto,
   StudentResponseDto,
 } from './dto/studemt.dto';
@@ -31,7 +32,7 @@ export class StudentController {
   }
 
   @Post()
-  createStudent(@Body() body: CreateStudentDto): StudentResponseDto {
+  createStudent(@Body() body: CreateUserDto): StudentResponseDto {
     console.log(body);
     return this.studentService.createStudent(body);
   }

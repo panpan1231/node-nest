@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   StudentResponseDto,
   CreateStudentDto,
+  CreateUserDto,
   UpdateStudentDto,
 } from './dto/studemt.dto';
 import { students } from '../db';
@@ -17,7 +18,7 @@ export class StudentService {
       return item.id == id;
     });
   }
-  createStudent(payload: CreateStudentDto) {
+  createStudent(payload: CreateUserDto) {
     let newStudent: StudentResponseDto = {
       id: uuid(),
       ...payload,
